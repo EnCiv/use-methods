@@ -1,0 +1,24 @@
+{
+  "name": "use-methods",
+  "version": "1.0.0",
+  "description": "use-methods hook for react",
+  "main": "use-methods.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnCiv/use-methods.git"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "methods"
+  ],
+  "author": "David Fridley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnCiv/use-methods/issues"
+  },
+  "homepage": "https://github.com/EnCiv/use-methods#readme"
+}
