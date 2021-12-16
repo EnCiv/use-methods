@@ -1,8 +1,8 @@
 # useMethods( functionThatReturnsObjectOfMethods, initialState, dependencies )
 
 There are many implementations of useMethods - this differes from some of them because 
-the function the declares the methods be delared within the react component, and it can use props without
-causing unnecessary rerendering or unexpected firing of actions
+the function that declares the methods can be declared within the react component, and it can use props without
+causing unnecessary rerendering or unexpected firing of actions.
 
 ## functionThatReturnsObjectOfMethods( state, dispatch )
 ### state
