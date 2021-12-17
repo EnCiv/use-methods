@@ -8,7 +8,7 @@ causing unnecessary rerendering or unexpected firing of methods.
 ### state
 the object representing the current state
 ### dispatch (new state)
-the function to call with the new state keys.  No need to do (...state, key: 'value') becuase the ...state will be taken care of in the dispatch
+the function to call with the new state keys.  No need to do {...state, key: 'value'} becuase the ...state will be taken care of in the dispatch
 ```
 function (state,dispatch){
     return {
