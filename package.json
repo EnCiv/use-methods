@@ -2,10 +2,10 @@
   "name": "use-methods",
   "version": "1.0.1",
   "description": "use-methods hook for react",
-  "main": "use-methods.js",
-  "type": "module",
+  "main": "dist/use-methods.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel use-methods.js -d dist"
   },
   "peerDependencies": {
     "react": "^16.14.0"
@@ -24,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/EnCiv/use-methods/issues"
   },
-  "homepage": "https://github.com/EnCiv/use-methods#readme"
+  "homepage": "https://github.com/EnCiv/use-methods#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5"
+  }
 }
