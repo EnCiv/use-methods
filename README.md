@@ -22,46 +22,74 @@ function (state,dispatch){
 }
 ```
 ## dependencies
-An Array of variables, if one of these variable changes, the functionThatReturnsObjectOfMethods will be rememorized (with the new values of the variables)
-By default this is [], meaning never rememoize the function
+An Array of variables, if one of these variable changes, the functionThatReturnsObjectOfMethods will be re-memoize (with the new values of the variables)
+By default this is [], meaning never re-memoize the function
 
 ## returns [state, methods]
 use-methods returns an array containing state, and methods. The array returned will change whenever there is a change within state or methods. 
 
-- `state`  can not be used to determine if there is a change within state from a previous value of state. If you want to pass something as a prop to a child function and cause a rerender on changes in state, pass the array.   **Why?**: if state itself changes (is immutable), the methods have to be reinstantiated with the new value of state every time, causing extra load, and potentially causing side effects within the methods.  Methods don't have to be pure functions, it's up to the implementation.  
+- `state`  can not be used to determine if there is a change within state from a previous value of state. If you want to pass something as a prop to a child function and cause a rerender on changes in state, pass the array.   **Why?**: if state itself changes (is immutable), the methods have to be reinstantiated with the new value of state every time, causing extra load, and potentially causing side effects within the methods.  Methods don't have to be pure functions, it's up to the implementation. An example would be a method that saves a value in state, and makes an api call to write it to a database. 
 
-``` 
-    // DisplaySomething will never re-render on a state change
-    const [state,methods]=useMethods((stsate,dispatch)=>{...}, {key: value}, [])
+```js
+    // bad - DisplaySomething will never re-render on a state change
+    const [state,methods]=useMethods((state,dispatch)=>{...}, {key: value}, [])
     return <DisplaySomething state={state} ... >
-
+```
+```js
     // this works
-    const electionOM=useMethods((stsate,dispatch)=>{...}, {key: value}, [])
-    return <DisplaySomething electionOM={electionOM} ... >
+    const countOM=useMethods((state,dispatch)=>{...}, {key: value}, [])
+    return <DisplaySomething countOM={countOM} ... >
     
 ```
+And typically, if you are passing state to a child component you will also want to pass methods so the child can operate on the state.
+
 - `methods` will only change if there is a change in `deps`
 
 ## Example
-```
+```js
 import useMethods from 'use-methods'
 
 function DisplayCount(props){
-    const {incrementAmount=1}=props
     const [state, methods] = useMethods(
-        (dispatch,state)=>{
+        (dispatch,state)=>({
             increment(){
-                dispatch({count: state.count+incrementAmount})
+                dispatch({count: state.count+props.incrementAmount})
             }
-        }, 
+        }), 
         {count: 0}, 
-        props.incrementAmount
+        [props.incrementAmount]
     )
     return (
         <div>
             <div>{state.count}</div>
-            <button onClick(()=>methods.increment())</button>
+            <button onClick={()=>methods.increment()}>Increment</button>
         </div>
     )
 }
+
+ReactDom.render(<DisplayCount incrementAmount={2}>, getElementById('root'))
+```
+In the above example, `functionThatReturnsObjectOfMethods` depends on a prop, and so it has to be delcared within DisplayCount, and still works efficiently. But if it doesn't depend on a prop, then it would be fine, and more efficieint to delcare it outside the function.
+
+```js
+const countMethods= (dispatch,state)=>({
+    increment(){
+        dispatch({count: state.count+2})
+    }
+})
+
+function DisplayCount(props){
+    const [state, methods] = useMethods(
+        countMethods,
+        {count: 0}
+    )
+    return (
+        <div>
+            <div>{state.count}</div>
+            <button onClick={()=>methods.increment()}>Increment</button>
+        </div>
+    )
+}
+
+ReactDom.render(<DisplayCount>, getElementById('root'))
 ```
