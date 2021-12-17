@@ -28,7 +28,7 @@ By default this is [], meaning never re-memoize the function
 ## returns [state, methods]
 use-methods returns an array containing state, and methods. The array returned will change whenever there is a change within state or methods. 
 
-- `state`  can not be used to determine if there is a change within state from a previous value of state. If you want to pass something as a prop to a child function and cause a rerender on changes in state, pass the array.   **Why?**: if state itself changes (is immutable), the methods have to be reinstantiated with the new value of state every time, causing extra load, and potentially causing side effects within the methods.  Methods don't have to be pure functions, it's up to the implementation. An example would be a method that saves a value in state, and makes an api call to write it to a database. 
+- `state`  can not be used to determine if there is a change within state from a previous value of state. If you want to pass something as a prop to a child function and cause a rerender on changes in state, pass the array.  Methods don't have to be pure functions, it's up to the implementation. An example would be a method that saves a value in state, and makes an api call to write it to a database. 
 
 ```js
     // bad - DisplaySomething will never re-render on a state change
