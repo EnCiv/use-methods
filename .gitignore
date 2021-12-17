@@ -66,9 +66,6 @@ enciv-transcribe.json
 # next.js build output
 .next
 
-## save time - don't upload the dist directory every time
-dist/
-
 ## ignore webpack created files
 assets/webpack/
 ## ignore js files created by other node_modules to be loaded by the browser
