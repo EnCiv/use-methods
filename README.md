@@ -4,23 +4,29 @@ There are many implementations of useMethods - this differes from some of them b
 the function that declares the methods can be declared within the react component, and it can use props without
 causing unnecessary rerendering or unexpected firing of methods.
 
-## functionThatReturnsObjectOfMethods( state, dispatch )
-### state
-the object representing the current state
+## functionThatReturnsObjectOfMethods( dispatch, state )
 ### dispatch (new state)
 the function to call with the new state keys.  No need to do {...state, key: 'value'} becuase the ...state will be taken care of in the dispatch
+### state
+the object representing the current state
 ```
-function (state,dispatch){
+function (dispatch, state){
     return {
         method1(p1,p2,...) { 
             dispatch({key: 'value'})
         },
         method2() {
             dispatch({key2: 'value'})
+        },
+        increment(){
+            dispatch({count: state.count+1})
         }
     }
 }
 ```
+## initialState
+object to initialize the state with
+
 ## dependencies
 An Array of variables, if one of these variable changes, the functionThatReturnsObjectOfMethods will be re-memoize (with the new values of the variables)
 By default this is [], meaning never re-memoize the function
