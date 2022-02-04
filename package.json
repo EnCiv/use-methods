@@ -1,6 +1,6 @@
 {
   "name": "use-methods",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "use-methods hook for react",
   "main": "dist/use-methods.js",
   "scripts": {
@@ -30,5 +30,8 @@
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
