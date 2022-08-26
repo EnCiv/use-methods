@@ -5,7 +5,7 @@ import setOrDelete from "./set-or-delete"
 // this reducer will mutate the contents of the methodState object based on the properties in the object "action'.  So action does not have a type like it would in other cases.
 // reducer will retun a new state but with the same methodState object - though it will be mutated
 function reducer(state, action) {
-  setOrDeleteWithMessages(state.methodState, action) // dispath calls may get queued and executed in batch, key: undefined deletes an property
+  setOrDelete(state.methodState, action) // dispath calls may get queued and executed in batch, key: undefined deletes an property
   return { ...state }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "use-methods",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "use-methods hook for react",
   "main": "dist/use-methods.js",
   "scripts": {
