@@ -1,11 +1,11 @@
 import React, { useCallback, useReducer } from "react"
-import { merge } from "lodash"
+import setOrDelete from "./set-or-delete"
 
 // while "object" state  (a pointer for you C programmers) will change each time, the object state.methodState (meaning the pointer methodState) will always be the same
 // this reducer will mutate the contents of the methodState object based on the properties in the object "action'.  So action does not have a type like it would in other cases.
 // reducer will retun a new state but with the same methodState object - though it will be mutated
 function reducer(state, action) {
-  merge(state.methodState, action) // use merge because dispath calls may get queued and executed in batch
+  setOrDeleteWithMessages(state.methodState, action) // dispath calls may get queued and executed in batch, key: undefined deletes an property
   return { ...state }
 }
 
@@ -39,3 +39,4 @@ export function useMethods(methodsObj, initialState, deps = []) {
 }
 
 export default useMethods
+export { setOrDelete }
