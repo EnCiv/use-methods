@@ -1,6 +1,7 @@
 const cloneDeep = require("lodash/cloneDeep")
 
 function sameKeys(dstKeys, srcKeys) {
+  // keys are from an array so they are in order
   if (dstKeys.length !== srcKeys.length) return false
   for (let i = 0; i < dstKeys.length; i++) {
     if (dstKeys[i] !== srcKeys[i]) {
@@ -19,10 +20,15 @@ function stringify(obj, key) {
 }
 
 function setOrDeleteKeyWithMessages(dst, src, messages, keyPath, key) {
-  if (typeof dst[key] === "object" && typeof src[key] === "object")
+  if (
+    typeof dst[key] === "object" &&
+    typeof src[key] === "object" &&
+    dst[key] !== null &&
+    src[key] !== null
+  )
     setOrDeleteWithMessages(dst[key], src[key], messages, keyPath)
   else {
-    if (typeof src[key] === "object") {
+    if (typeof src[key] === "object" && src[key] !== null) {
       if (messages)
         messages.push(
           `${keyPath}: changing ${stringify(dst, key)} to ${stringify(
@@ -45,7 +51,12 @@ function setOrDeleteKeyWithMessages(dst, src, messages, keyPath, key) {
 }
 
 export default function setOrDeleteWithMessages(dst, src, messages, keyPath) {
-  if (typeof dst === "object" && typeof src === "object") {
+  if (
+    typeof dst === "object" &&
+    typeof src === "object" &&
+    dst !== null &&
+    src !== null
+  ) {
     const dstKeys = Object.keys(dst)
     const srcKeys = Object.keys(src)
     if (Array.isArray(dst) && Array.isArray(src)) {
